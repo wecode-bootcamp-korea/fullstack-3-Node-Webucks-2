@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id       Int        @id @default(autoincrement())
+  name     String
+  products products[]
+}
+
+model products {
+  id                 Int                  @id @default(autoincrement())
+  korean_name        String
+  english_name       String
+  category_id        Int
+  categories         categories           @relation(fields: [category_id], references: [id])
+  images             images[]
+  nutritions         nutritions[]
+  products_allergies products_allergies[]
+
+  @@index([category_id], name: "category_id")
+}
+
+model images {
+  id         Int      @id @default(autoincrement())
+  image_url  String   @db.VarChar(1000)
+  product_id Int
+  products   products @relation(fields: [product_id], references: [id])
+
+  @@index([product_id], name: "product_id")
+}
+
+model allergies {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  products_allergies products_allergies[]
+}
+
+model products_allergies {
+  id         Int       @id @default(autoincrement())
+  product_id Int
+  allergy_id Int
+  allergies  allergies @relation(fields: [allergy_id], references: [id])
+  products   products? @relation(fields: [product_id], references: [id])
+
+  @@index([allergy_id], name: "allergy_id")
+  @@index([product_id], name: "product_id")
+}
+
+model nutritions {
+  id         Int      @id @default(autoincrement())
+  product_id Int
+  name       String
+  amount     Int
+  products   products @relation(fields: [product_id], references: [id])
+
+  @@index([product_id], name: "nutritions_product_id_fkey")
+}
+
+model users {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  password      String
+  username      String?
+  address       String?
+  phone_number  String?
+  policy_agreed Boolean @default(true)
+}
