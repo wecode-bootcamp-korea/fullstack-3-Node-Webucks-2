@@ -1,11 +1,17 @@
-const users = (req, res) => {
-  try {
-    const createdUser = await prisma.$queryRaw`
-            insert into users(email, password, username, address, phone_number) values (${email}, ${password}, ${username}, ${address}, ${phone_number});`;
+const { PrismaClient } = require("@prisma/client");
 
-    return res.status(201).json({ message: "CREATED" });
+const prisma = new PrismaClient();
+
+const users = async (req, res) => {
+  try {
+    const userList = await prisma.$queryRaw`
+            select * from users`;
+
+    return res.json({ userList });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: err.message });
   }
 };
+
+module.exports = { users };
