@@ -1,11 +1,19 @@
-const http = require("http");
-const express = require("express");
-const { PrismaClient } = require("@prisma/client");
-const { signup } = require("./src/signup");
-const { ListUsers } = require("./src/users");
-const { ListCategories, AddCategories } = require("./src/categories");
-const { ListProducts, AddProducts } = require("./src/products");
-const { Detail } = require("./src/detail");
+// const http = require("http");
+import http from "http";
+// const express = require("express");
+import express from "express";
+// const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
+// const { signup } = require("./src/signup");
+import signup from "./src/signup";
+// const { ListUsers } = require("./src/users");
+import ListUsers from "./src/users";
+// const { ListCategories, AddCategories } = require("./src/categories");
+import { ListCategories, AddCategories } from "./src/categories";
+// const { ListProducts, AddProducts } = require("./src/products");
+import { ListProducts, AddProducts } from "./src/products";
+// const { Detail } = require("./src/detail");
+import Detail from "./src/detail";
 
 const prisma = new PrismaClient();
 

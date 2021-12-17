@@ -1,4 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
+// const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -15,4 +16,5 @@ const ListUsers = async (req, res) => {
   }
 };
 
-module.exports = { ListUsers };
+// module.exports = { ListUsers };
+export default ListUsers;

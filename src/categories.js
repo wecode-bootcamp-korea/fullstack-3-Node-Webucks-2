@@ -1,4 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
+// const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -32,4 +33,5 @@ const AddCategories = async (req, res) => {
   }
 };
 
-module.exports = { ListCategories, AddCategories };
+// module.exports = { ListCategories, AddCategories };
+export { ListCategories, AddCategories };
