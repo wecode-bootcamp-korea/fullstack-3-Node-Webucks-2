@@ -1,8 +1,11 @@
 const http = require("http");
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
-const { users } = require("./src/users");
 const { signup } = require("./src/signup");
+const { ListUsers } = require("./src/users");
+const { ListCategories, AddCategories } = require("./src/categories");
+const { ListProducts, AddProducts } = require("./src/products");
+const { Detail } = require("./src/detail");
 
 const prisma = new PrismaClient();
 
@@ -10,8 +13,13 @@ const app = express();
 app.use(express.json());
 
 app.post("/users/signup", signup);
+app.post("/categories", AddCategories);
+app.post("/products", AddProducts);
 
-app.get("/users", users);
+app.get("/users", ListUsers);
+app.get("/categories", ListCategories);
+app.get("/products", ListProducts);
+app.get("/detail", Detail);
 
 const server = http.createServer(app);
 

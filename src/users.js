@@ -2,7 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-const users = async (req, res) => {
+const ListUsers = async (req, res) => {
   try {
     const userList = await prisma.$queryRaw`
             select * from users`;
@@ -10,8 +10,9 @@ const users = async (req, res) => {
     return res.json({ userList });
   } catch (err) {
     console.log(err);
+
     return res.status(500).json({ message: err.message });
   }
 };
 
-module.exports = { users };
+module.exports = { ListUsers };

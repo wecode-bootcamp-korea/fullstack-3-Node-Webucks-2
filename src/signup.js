@@ -14,6 +14,7 @@ const signup = async (req, res) => {
     return res.status(201).json({ message: "CREATED" });
   } catch (err) {
     console.log(err);
+
     return res.status(500).json({ message: err.message });
   }
 };
