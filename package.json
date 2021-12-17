@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "nodemon": "nodemon server.js"
+    "nodemon": "nodemon --exec babel-node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2#readme",
   "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.15",
     "prisma": "^3.6.0"
