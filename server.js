@@ -2,7 +2,7 @@ import http from "http";
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import signup from "./src/signup";
-import { ListUsers, userUpdate } from "./src/users";
+import { ListUsers, userDelete, userUpdate } from "./src/users";
 import { ListCategories, AddCategories } from "./src/categories";
 import { ListProducts, AddProducts } from "./src/products";
 import Detail from "./src/detail";
@@ -22,6 +22,7 @@ app.get("/products", ListProducts);
 app.get("/detail", Detail);
 
 app.put("/users", userUpdate);
+app.delete("/users", userDelete);
 
 const server = http.createServer(app);
 
