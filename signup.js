@@ -65,11 +65,17 @@
 
 // start()
 
-const http = require('http')
-const express = require('express')
-const { PrismaClient } = require('@prisma/client')
+// const http = require('http')
+import http from "http";
+import express from "express";
+import pkg from "@prisma/client";
+// const express = require('express')
+// const { PrismaClient } = require('@prisma/client')
 
-const prisma = new PrismaClient() 
+// import pkg from '@prisma/client';
+const {PrismaClient} = pkg;
+
+export const prisma = new PrismaClient() 
 
 const app = express()
 app.use(express.json()) // for parsing application/json
