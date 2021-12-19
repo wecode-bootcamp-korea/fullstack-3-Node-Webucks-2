@@ -6,6 +6,7 @@ import { ListUsers, userDelete, userUpdate } from "./src/users";
 import { ListCategories, AddCategories } from "./src/categories";
 import { ListProducts, AddProducts } from "./src/products";
 import Detail from "./src/detail";
+import login from "./src/login";
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.post("/users/signup", signup);
 app.post("/categories", AddCategories);
 app.post("/products", AddProducts);
+app.post("/login", login);
 
 app.get("/users", ListUsers);
 app.get("/categories", ListCategories);

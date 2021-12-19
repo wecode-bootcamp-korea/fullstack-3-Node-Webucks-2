@@ -53,6 +53,9 @@ const userUpdate = async (req, res) => {
 const userDelete = async (req, res) => {
   const { id } = req.query;
   try {
+    if (!id) {
+      return res.status(400).json({ message: "id invalid" });
+    }
     const deleted = await prisma.$queryRaw`
       DELETE FROM users WHERE id=${id}`;
 
