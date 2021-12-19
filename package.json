@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@prisma/client": "^3.6.0",
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "prettier-plugin-prisma": "^3.6.0"
   }
