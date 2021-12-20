@@ -1,12 +1,15 @@
 import { ProductDao } from "../models";
 
 const ListProducts = async () => {
-  console.log(ProductDao);
   return ProductDao.ListProducts();
 };
 
-const AddProducts = async () => {
-  return ProductDao.AddProducts();
+const AddProducts = async (korean_name, english_name, category_id) => {
+  const products = await ProductDao.AddProducts(
+    korean_name,
+    english_name,
+    category_id
+  );
 };
 
 export default { ListProducts, AddProducts };
