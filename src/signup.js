@@ -22,5 +22,4 @@ const signup = async (req, res) => {
   }
 };
 
-// module.exports = { signup };
 export default signup;

@@ -1,30 +1,17 @@
 import http from "http";
 import express from "express";
-import { PrismaClient } from "@prisma/client";
-import signup from "./src/signup";
-import { ListUsers, userDelete, userUpdate } from "./src/users";
-import { ListCategories, AddCategories } from "./src/categories";
-import { ListProducts, AddProducts } from "./src/products";
-import Detail from "./src/detail";
-import login from "./src/login";
-
-const prisma = new PrismaClient();
+import routes from "./routes";
 
 const app = express();
+
 app.use(express.json());
+app.use(routes);
 
-app.post("/users/signup", signup);
-app.post("/categories", AddCategories);
-app.post("/products", AddProducts);
-app.post("/login", login);
-
-app.get("/users", ListUsers);
-app.get("/categories", ListCategories);
-app.get("/products", ListProducts);
-app.get("/detail", Detail);
-
-app.put("/users", userUpdate);
-app.delete("/users", userDelete);
+app.use((req, res) => {
+  const { status, message } = err;
+  console.err(err);
+  res.status(status || 500).json({ message });
+});
 
 const server = http.createServer(app);
 
