@@ -1,3 +1,5 @@
 import ProductDao from "./ProductDao";
+import CategoryDao from "./CategoryDao";
+import UserDao from "./UserDao";
 
-export { ProductDao };
+export { ProductDao, CategoryDao, UserDao };

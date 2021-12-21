@@ -1,17 +1,17 @@
-import UserService from "../services/UserService";
+import { UserService } from "../services";
 
 const ListUsers = async (req, res) => {
   try {
     const users = await UserService.ListUsers();
 
-    res.status(201).json({
+    return res.status(201).json({
       massage: "SUCCESS",
       data: users,
     });
   } catch (err) {
     console.log(err);
 
-    return res.status(500).json({ message: err.message });
+    return res.status(400).json({ message: err.message });
   }
 };
 

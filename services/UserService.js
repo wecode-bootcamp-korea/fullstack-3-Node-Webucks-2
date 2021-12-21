@@ -1,4 +1,4 @@
-import UserDao from "../models/UserDao";
+import { UserDao } from "../models";
 
 const ListUsers = async () => {
   return UserDao.ListUsers();

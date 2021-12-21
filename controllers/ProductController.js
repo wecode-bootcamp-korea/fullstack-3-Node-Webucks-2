@@ -4,14 +4,14 @@ const ListProducts = async (req, res) => {
   try {
     const products = await ProductService.ListProducts();
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "SUCCESS",
       data: products,
     });
   } catch (err) {
     console.log(err);
 
-    return res.status(500).json({ message: err.message });
+    return res.status(400).json({ message: err.message });
   }
 };
 
@@ -29,7 +29,7 @@ const AddProducts = async (req, res) => {
   } catch (err) {
     console.log(err);
 
-    return res.status(500).json({ message: err.message });
+    return res.status(400).json({ message: err.message });
   }
 };
 
