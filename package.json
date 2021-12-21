@@ -1,22 +1,15 @@
 {
-  "name": "fullstack-3-node-webucks-2",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "wecode backend files",
+  "main": "coffeeDetail.js",
   "scripts": {
-    "nodemon": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2/issues"
-  },
-  "homepage": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2#readme",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "prettier-plugin-prisma": "^3.6.0"
   }
 }
