@@ -6,4 +6,5 @@ const productRouter = require('./productRoute')
 
 router.use('/products', productRouter)
 router.use('/users', usersRouter) // '/users' 엔드포인트를 처리하기 위해 UserRouter 를 붙여줍니다.
+
 module.exports = router // 이렇게 내보낸 router 는 express app 의 미들웨어로 사용됩니다.

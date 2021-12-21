@@ -1,4 +1,7 @@
 const usersService = require('../services/usersService')
+const jwt = require('jsonwebtoken');
+const token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+
 
 const signIn = async(req, res) => {
 	try {
@@ -13,11 +16,11 @@ const signIn = async(req, res) => {
 		console.log('email in controller: ', email)
 
 
-		const token = await usersService.signIn(email, password)
-
+		await usersService.signIn(email, password)
+		const newUserToken = jwt.sign({email}, 'server_made_secret_key', {expiresIn: '1h'})
 		console.log('user in controller: ', token)
 
-		return res.status(200).json({ message: 'LOGIN_SUCCESS', token })
+		return res.status(200).json({ message: 'LOGIN_SUCCESS', token:newUserToken})
 
 	} catch (err) {
 		console.log(err)
@@ -39,7 +42,6 @@ const signUp = async(req, res) => {
 		 // controllers
 	
 		await usersService.signUp(email, username, password, address, phone_number, policy_agreed);
-		
 		return res.status(200).json({ message: 'signup_SUCCESS'})
 } catch (err) {
 	console.log(err)

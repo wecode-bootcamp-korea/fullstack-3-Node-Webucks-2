@@ -37,7 +37,7 @@ const signUp = async (email, username, password, address, phone_number, policy_a
 
 	if(user){
 		const error = new Error ('existing_USER')
-		error.statusCode = 400
+		error.statusCode = 409
 
 		throw error;
 	}
