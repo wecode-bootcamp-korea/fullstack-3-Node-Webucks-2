@@ -1,4 +1,6 @@
 const usersDao = require('../models/usersDao')
+const bcrypt = require('bcryptjs');
+
 
 const signIn = async (email, password) => {
 	console.log('email in services: ', email)
@@ -14,7 +16,10 @@ const signIn = async (email, password) => {
 		throw error
 	}
 
-	if (user.password !== password) {
+	const isEqualPw = await bcrypt.compare(password, user.password);
+  console.log(isEqualPw);
+
+	if (!isEqualPw) {
 		const error = new Error ('INVALID_USER')
 		error.statusCode = 400
 
@@ -36,9 +41,11 @@ const signUp = async (email, username, password, address, phone_number, policy_a
 
 		throw error;
 	}
-	else{
-		return 	await usersDao.createUser(email, username, password, address, phone_number, policy_agreed)
 
+	else{
+		const hashed = await bcrypt.hash(password,10);
+		console.log(hashed);
+		return 	await usersDao.createUser(email, username, password=hashed, address, phone_number, policy_agreed)
 	}
 	// return 	await usersDao.createUser(email, username, password, address, phone_number, policy_agreed)
 }

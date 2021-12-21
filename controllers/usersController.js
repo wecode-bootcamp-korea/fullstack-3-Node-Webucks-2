@@ -12,6 +12,7 @@ const signIn = async(req, res) => {
 
 		console.log('email in controller: ', email)
 
+
 		const token = await usersService.signIn(email, password)
 
 		console.log('user in controller: ', token)
@@ -37,10 +38,9 @@ const signUp = async(req, res) => {
 		}
 		 // controllers
 	
-		const user = await usersService.signUp(email, username, password, address, phone_number, policy_agreed);
-
-		return res.status(200).json({ message: 'signup_SUCCESS'},user)
-
+		await usersService.signUp(email, username, password, address, phone_number, policy_agreed);
+		
+		return res.status(200).json({ message: 'signup_SUCCESS'})
 } catch (err) {
 	console.log(err)
 	return res.status(err.statusCode || 500).json({ message: err.message })
