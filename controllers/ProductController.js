@@ -33,4 +33,19 @@ const AddProducts = async (req, res) => {
   }
 };
 
-export default { ListProducts, AddProducts };
+const ProductDetail = async (req, res) => {
+  try {
+    const detail = await ProductService.ProductDetail();
+
+    return res.status(201).json({
+      message: "SUCCESS",
+      data: detail,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(400).json({ message: err.message });
+  }
+};
+
+export default { ListProducts, AddProducts, ProductDetail };

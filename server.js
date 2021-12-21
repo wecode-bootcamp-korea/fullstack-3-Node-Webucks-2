@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(routes);
 
-app.use((req, res) => {
+app.use((err, req, res, next) => {
   const { status, message } = err;
   console.err(err);
   res.status(status || 500).json({ message });

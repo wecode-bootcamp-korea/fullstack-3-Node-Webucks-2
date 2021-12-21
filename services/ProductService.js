@@ -12,4 +12,8 @@ const AddProducts = async (korean_name, english_name, category_id) => {
   );
 };
 
-export default { ListProducts, AddProducts };
+const ProductDetail = async () => {
+  return ProductDao.ProductDetail();
+};
+
+export default { ListProducts, AddProducts, ProductDetail };
