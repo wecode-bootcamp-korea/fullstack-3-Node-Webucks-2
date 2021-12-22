@@ -6,9 +6,9 @@ const getCategory = async(req,res) => {
     const read = await productService.getCategory()
     return res.status(201).json(read)
 			}
-		catch (err) { // 2
+		catch (err) { 
       console.log(err)
-      return res.status(500).json({ message: err.message }) // 6
+      return res.status(500).json({ message: err.message })
     }
   }
 
@@ -31,9 +31,9 @@ const getCategory = async(req,res) => {
         const read = await productService.getCoffeeDetail()
         return res.status(201).json(read)
           }
-        catch (err) { // 2
+        catch (err) { 
           console.log(err)
-          return res.status(500).json({ message: err.message }) // 6
+          return res.status(500).json({ message: err.message }) 
         }
       }
     

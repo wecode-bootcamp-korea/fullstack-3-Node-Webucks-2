@@ -1,5 +1,8 @@
 const usersDao = require('../models/usersDao')
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+
 
 
 const signIn = async (email, password) => {
@@ -15,6 +18,8 @@ const signIn = async (email, password) => {
 
 		throw error
 	}
+	
+
 
 	const isEqualPw = await bcrypt.compare(password, user.password);
   console.log(isEqualPw);
@@ -26,9 +31,17 @@ const signIn = async (email, password) => {
 		throw error
 	}
 
-	const token = '1111'
+	return newUserToken = jwt.sign({email}, 'server_made_secret_key', {expiresIn: '1h'})
 
-	return token
+	
+	
+		// const validuser= jwt.verify(newUserToken, 'server_made_secret_key')
+		// if(!validuser){
+		// 	const error = new Error ('INVALID_USER')
+		// 	error.statusCode = 400
+	
+		// 	throw error
+		// }// 추후 토큰 인증용 함수. 
 }
 
 const signUp = async (email, username, password, address, phone_number, policy_agreed) => {
@@ -47,9 +60,7 @@ const signUp = async (email, username, password, address, phone_number, policy_a
 		console.log(hashed);
 		return 	await usersDao.createUser(email, username, password=hashed, address, phone_number, policy_agreed)
 	}
-	// return 	await usersDao.createUser(email, username, password, address, phone_number, policy_agreed)
 }
-	// console.log('user in service: ', user)
 
 
 
