@@ -10,6 +10,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"jsonwebtoken": "^8.5.1",
 		"prettier-plugin-prisma": "^3.6.0"
 	},
 	"repository": {
@@ -19,5 +20,8 @@
 	"bugs": {
 		"url": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2/issues"
 	},
-	"homepage": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2#readme"
+	"homepage": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.1"
+	}
 }
