@@ -1,22 +1,18 @@
 {
-  "name": "fullstack-3-node-webucks-2",
+  "name": "node_tutorial",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "nodemon": "nodemon server.js"
+  "main": "categories.js",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prettier-plugin-prisma": "^3.6.0",
+    "routes": "^2.1.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2/issues"
-  },
-  "homepage": "https://github.com/wecode-bootcamp-korea/fullstack-3-Node-Webucks-2#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.15"
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
