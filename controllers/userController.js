@@ -21,16 +21,17 @@ const signIn = async (req, res) => {
     const REQUIRED_KEYS = { email, password };
 
     for (let key in REQUIRED_KEYS) {
-      console.log("key : ", key);
-      console.log("REQUIRED_KEYS : ", REQUIRED_KEYS);
       if (!REQUIRED_KEYS[key]) {
         return res.status(400).json({ message: "KEY_ERROR" });
       }
     }
 
     const user = await userServices.signIn(email, password);
-
-    return res.status(200).json({ message: "LOGIN_SUCCEES", user });
+    const token = jwt.sign({ id: 1 }, email, { expiresIn: "30m" });
+    console.log("email jwt : ", token);
+    return res
+      .status(200)
+      .json({ message: "LOGIN_SUCCEES", user, "email jwt token": token });
   } catch (err) {
     console.log(err);
     return res.status(err.statusCode || 500).json({ message: err.message });

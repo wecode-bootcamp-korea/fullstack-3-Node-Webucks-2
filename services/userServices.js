@@ -2,17 +2,17 @@ const bcrypt = require("bcrypt");
 
 const userDao = require("../models/userDao");
 
+// bcrypt hashed 코드와 비교
 function compare(reqPassword, dbPassword) {
   const isSame = bcrypt.compareSync(reqPassword, dbPassword);
-
   return isSame;
 }
 
 const signIn = async (email, password) => {
-  console.log("email in services: ", email);
   const user = await userDao.getUserByEmail(email);
   console.log("user in service: ", user);
 
+  // user 정보가 존재하지 않는 경우
   if (!user) {
     const error = new Error("INVALID_USER");
     error.statusCode = 400;
@@ -20,6 +20,7 @@ const signIn = async (email, password) => {
     throw error;
   }
 
+  // 비밀번호가 다를 경우
   if (!compare(password, user.password)) {
     const error = new Error("INVALID_USER");
     error.statusCode = 400;
@@ -30,6 +31,7 @@ const signIn = async (email, password) => {
   return user;
 };
 
+// 회원 가입
 const signUp = async (email, password, username, address, phone_number) => {
   const userData = await userDao.getUserByEmail(email);
 

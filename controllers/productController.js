@@ -11,9 +11,9 @@ const getList = async (req, res) => {
   }
 };
 
-const getProduct = async (req, res) => {
+const getDetail = async (req, res) => {
   try {
-    const finalpDetail = await productService.productDetail();
+    const finalpDetail = await productService.getDetail();
 
     return res.status(200).json({ data: finalpDetail });
   } catch (err) {
@@ -24,7 +24,7 @@ const getProduct = async (req, res) => {
 
 const getCategory = async (req, res) => {
   try {
-    const finalcDetail = await productService.categoryDetail();
+    const finalcDetail = await productService.getCategory();
 
     return res.status(200).json({ data: finalcDetail });
   } catch (err) {
@@ -33,4 +33,4 @@ const getCategory = async (req, res) => {
   }
 };
 
-module.exports = { getList, getProduct, getCategory };
+module.exports = { getList, getDetail, getCategory };

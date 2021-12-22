@@ -1,6 +1,6 @@
 const prisma = require("./index");
 
-const getProductList = async () => {
+const getProduct = async () => {
   const products = await prisma.$queryRaw`
     SELECT 
       id,korean_name,english_name
@@ -11,7 +11,7 @@ const getProductList = async () => {
   return products;
 };
 
-const getProductDetail = async () => {
+const getDetail = async () => {
   const detail = await prisma.$queryRaw`
     SELECT
       products.id, 
@@ -51,4 +51,4 @@ const getCategory = async () => {
   return categories;
 };
 
-module.exports = { getProductList, getProductDetail, getCategory };
+module.exports = { getProduct, getDetail, getCategory };
