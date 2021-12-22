@@ -1,8 +1,16 @@
 const http = require('http');
-const app = require('./app');
-const server = http.createServer(app);
-const prisma = require('./prisma');
+const express = require('express');
+const { PrismaClient } = require('@prisma/client');
+const routes = require('./routes');
 const PORT = 8000;
+
+const prisma = new PrismaClient();
+
+const app = express();
+app.use(express.json());
+app.use(routes);
+
+const server = http.createServer(app);
 
 const start = async () => {
 	try {

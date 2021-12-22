@@ -10,4 +10,20 @@ const getUserByEmail = async (email) => {
 	return user;
 };
 
-module.exports = { getUserByEmail };
+const createUser = async (
+	email,
+	password,
+	username,
+	address,
+	phone_number,
+	policy_agreed
+) => {
+	const users = await prisma.$queryRaw`
+    INSERT INTO users (email, password, username, address, phone_number) 
+       VALUES (${email}, ${encryptedPassword}, ${username}, ${address}, ${phone_number})
+  `;
+
+	return users;
+};
+
+module.exports = { getUserByEmail, createUser };

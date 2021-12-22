@@ -1,7 +1,15 @@
-const prisma = require('../prisma');
+const productDao = require('../models/productDao');
 
-const getAllProducts = () => {
-	return prisma.products.findMany();
+const getCategories = () => {
+	return productDao.getCategories();
 };
 
-module.exports = { getAllProducts };
+const getProductLists = () => {
+	return productDao.getProductLists();
+};
+
+const getProductDetail = () => {
+	return productDao.getProductDetail();
+};
+
+module.exports = { getCategories, getProductLists, getProductDetail };

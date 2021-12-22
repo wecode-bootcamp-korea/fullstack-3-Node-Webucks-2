@@ -1,4 +1,3 @@
-const { __esModule } = require('uuid');
 const userService = require('../services/userService');
 
 const signIn = async (req, res) => {
@@ -25,4 +24,26 @@ const signIn = async (req, res) => {
 	}
 };
 
-module.exports = { signIn };
+const createUser = async (req, res) => {
+	try {
+		const { email, username, password, address, phone_number, policy_agreed } =
+			req.body;
+
+		const users = await userService.createUser(
+			email,
+			username,
+			password,
+			address,
+			phone_number,
+			policy_agreed
+		);
+
+		return res.status(201).json({ message: 'CREATED' });
+	} catch (err) {
+		console.log(err);
+
+		return res.status(400).json({ message: err.message });
+	}
+};
+
+module.exports = { signIn, createUser };
