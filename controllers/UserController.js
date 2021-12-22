@@ -1,5 +1,5 @@
 import { UserService } from "../services";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 
 const ListUsers = async (req, res) => {
   try {
@@ -20,21 +20,31 @@ const CreateUser = async (req, res) => {
   try {
     const { email, username, password, address, phone_number } = req.body;
 
-    const encryptedPassword = await bcrypt.hashSync(password, 10);
+    const requiredKey = {
+      email,
+      password,
+      username,
+      address,
+      phone_number,
+    };
 
-    const uesrs = await UserService.CreateUser(
+    for (let key in requiredKey) {
+      if (!requiredKey[key]) res.status(400).send("양식이 올바르지 않습니다.");
+    }
+
+    const users = await UserService.CreateUser(
       email,
       username,
-      encryptedPassword,
+      password,
       address,
       phone_number
     );
 
-    return res.status(201).json({ message: "CREATED" });
+    return res.status(201).json({ message: "CREATED", email: `${email}` });
   } catch (err) {
     console.log(err);
 
-    return res.status(400).json({ message: err.mess });
+    return res.status(400).json({ message: err.message });
   }
 };
 
@@ -42,13 +52,13 @@ const SignIn = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = UserService.SignIn(email, password);
+    const users = await UserService.SignIn(email, password);
 
-    return res.status(201).json({ message: "LOGIN_SUCCESS" });
+    res.status(201).json({ message: "LOGIN_SUCCESS" });
   } catch (err) {
     console.log(err);
 
-    return res.status(500).json({ message: err.message });
+    return res.status(400).json({ message: err.message });
   }
 };
 
