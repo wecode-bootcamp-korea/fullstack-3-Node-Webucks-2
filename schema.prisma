@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id   Int    @id @default(autoincrement())
+  name String
+  products products[]
+}
+
+model products {
+  id                Int                 @id @default(autoincrement())
+  korean_name       String
+  english_name      String
+  category_id       Int
+  description       String
+  categories categories @relation(fields: [category_id], references: [id])
+  nutritions        nutritions[]
+  product_allergies product_allergies[]
+  images images[]
+  Likes  Likes[]
+}
+
+model images {
+  id         Int      @id @default(autoincrement())
+  image_url  String
+  product_id Int
+  products   products @relation(fields: [product_id], references: [id])
+}
+
+model allergies {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  product_allergies product_allergies[]
+}
+
+model product_allergies {
+  id         Int       @id @default(autoincrement())
+  product_id Int
+  allergy_id Int
+  allergies  allergies @relation(fields: [allergy_id], references: [id])
+  products   products  @relation(fields: [product_id], references: [id])
+
+  @@index([allergy_id], map: "product_allergies_allergy_id_fkey")
+  @@index([product_id], map: "product_allergies_product_id_fkey")
+}
+
+model nutritions {
+  id         Int      @id @default(autoincrement())
+  name       String
+  product_id Int
+  amount     Float
+  calories   String
+  fat        String
+  sodium     String
+  protein    String
+  caffeine   String 
+  products   products @relation(fields: [product_id], references: [id])
+
+  @@index([product_id], map: "nutritons_product_id_fkey")
+}
+
+model users {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  password      String
+  username      String?
+  address       String?
+  phone_number  String?
+  policy_agreed Boolean @default(true)
+  Likes         Likes[]
+}
+
+model Likes {
+  id            Int     @id @default(autoincrement())
+  user_id       Int
+  product_id    Int
+  users         users @relation(fields: [user_id], references:[id])
+  products   products @relation(fields: [product_id], references:[id])
+}
