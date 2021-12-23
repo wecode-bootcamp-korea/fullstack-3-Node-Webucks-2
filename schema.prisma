@@ -23,6 +23,7 @@ model products {
   nutritions        nutritions[]
   product_allergies product_allergies[]
   images images[]
+  Likes  Likes[]
 }
 
 model images {
@@ -72,4 +73,13 @@ model users {
   address       String?
   phone_number  String?
   policy_agreed Boolean @default(true)
+  Likes         Likes[]
+}
+
+model Likes {
+  id            Int     @id @default(autoincrement())
+  user_id       Int
+  product_id    Int
+  users         users @relation(fields: [user_id], references:[id])
+  products   products @relation(fields: [product_id], references:[id])
 }

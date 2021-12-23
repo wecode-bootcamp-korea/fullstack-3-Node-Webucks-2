@@ -15,3 +15,4 @@ ${address},${phone_number}, ${policy_agreed});`
 }
 
 module.exports = { getUserByEmail, createUser }
+
