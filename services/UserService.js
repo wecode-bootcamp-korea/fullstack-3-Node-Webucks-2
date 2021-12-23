@@ -1,14 +1,13 @@
 import { UserDao } from "../models";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const ListUsers = async () => {
   return UserDao.ListUsers();
 };
 
 const CreateUser = async (email, username, password, address, phone_number) => {
-  console.log("service_email:", email);
   const [isEmail] = await UserDao.SignIn(email);
-  console.log("service_isEmail: ", isEmail);
 
   if (isEmail) {
     throw new Error("EAMIL_ALREADY_EXIST");
@@ -26,12 +25,12 @@ const CreateUser = async (email, username, password, address, phone_number) => {
 
 const SignIn = async (email, password) => {
   const [users] = await UserDao.SignIn(email);
-  console.log("services_users:", users);
 
   if (!users) {
-    // const error = new Error("INVALID_USER");
-    // throw error;
-    throw new Error("INVALID_USER");
+    const error = new Error("INVALID_USER");
+    error.statusCode = 404;
+    throw error;
+    // throw new Error("INVALID_USER");
   }
 
   const isLogin = bcrypt.compareSync(password, users.password);
@@ -41,6 +40,12 @@ const SignIn = async (email, password) => {
 
     throw error;
   }
+
+  const accessToken = jwt.sign({ id: users.id }, "secretkey", {
+    expiresIn: "1h",
+  });
+
+  return accessToken;
 
   // const generateToken = (id) => {
   //   return users.id;

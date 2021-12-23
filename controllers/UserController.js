@@ -52,9 +52,9 @@ const SignIn = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const users = await UserService.SignIn(email, password);
+    const token = await UserService.SignIn(email, password);
 
-    res.status(201).json({ message: "LOGIN_SUCCESS" });
+    res.status(201).json({ message: "LOGIN_SUCCESS", token: `${token}` });
   } catch (err) {
     console.log(err);
 

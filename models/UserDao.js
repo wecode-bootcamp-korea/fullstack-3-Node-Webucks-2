@@ -10,7 +10,7 @@ const ListUsers = async () => {
 
 const CreateUser = async (email, username, password, address, phone_number) => {
   try {
-    const encryptedPassword = await bcrypt.hashSync(password, 10);
+    const encryptedPassword = bcrypt.hashSync(password, 10);
 
     const users = await prisma.$queryRaw`
     INSERT INTO users (email, password, username, address, phone_number) 
@@ -28,7 +28,6 @@ const SignIn = async (email) => {
     FROM users WHERE email = ${email};`;
 
     // const users = await prisma.users.findUnique({ where: { email } });
-    console.log("SignIn_DAO: ", users);
     return users;
   } catch (err) {
     console.log(err);
